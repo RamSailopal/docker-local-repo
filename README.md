@@ -16,9 +16,9 @@ The script will first pull all repo images to the local Docker repo. It then wil
 
 To execute the script run:
 
-    ./repoclean 3 "192.168.240.9:5000/Ram"
+    ./repoclean 3 "192.168.240.9:5000/Ram" "/var/docker-images"
     
-Where 3 is the number of images for each repo to keep and 192.168.140.9:5000/Ram is the address of the registry as well as the name of the user hosting the repo.
+Where 3 is the number of images for each repo to keep, 192.168.140.9:5000/Ram is the address of the registry as well as the name of the user hosting the repo and /var/docker-images is the local registry container persistent storage.
 
 
 
