@@ -15,11 +15,16 @@ then
 fi
 if [[ "$2" == "" ]]
 then
-        echo "Enter the number of path of the local repo"
+        echo "Enter the address the local network repo"
+        exit 1
+fi
+if [[ "$3" == "" ]]
+then
+        echo "Enter path of the registry container persistent storage"
         exit 1
 fi
 
-IMGLIST=$(find /var/docker-images -maxdepth 9 -regex "^.*/_manifests/tags/[0-9].*" |awk -F "/" -v keep=$1 ' { imags[$9][$NF]="" } END { PROCINFO["sorted_in"]="@ind_num_desc";for (i in imags) {  cnt=0;for ( j in imags[i] ) {  cnt++; if (cnt<keep+1) { print i":"j }  } } }')
+IMGLIST=$(find "$3" -maxdepth 9 -regex "^.*/_manifests/tags/[0-9].*" |awk -F "/" -v keep=$1 ' { imags[$9][$NF]="" } END { PROCINFO["sorted_in"]="@ind_num_desc";for (i in imags) {  cnt=0;for ( j in imags[i] ) {  cnt++; if (cnt<keep+1) { print i":"j }  } } }')
 echo -e "\nPulling most $1 recent images to the local registry\n"
 echo "$IMGLIST" | while read img
 do
@@ -27,7 +32,7 @@ do
 done
 echo -e "\nRestarting and clearing Docker registry container\n"
 docker stop registry
-rm -Rf /var/docker-images/*
+rm -Rf "$3/*"
 docker start registry
 echo -e "\nPushing $1 most recent images to the remote registry\n"
 echo "$IMGLIST" | while read img
