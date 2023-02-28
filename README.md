@@ -8,7 +8,7 @@ The script assumes that a "local network" Docker registry container is already r
 
 https://docs.docker.com/registry/deploying/
 
-= Running the script
+# Running the script
 
 **Considerations** - For a large number of repos/images, this script is not an optimal solution.
 
