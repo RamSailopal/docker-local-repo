@@ -12,7 +12,7 @@ https://docs.docker.com/registry/deploying/
 
 **Considerations** - For a large number of repos/images, this script is not an optimal solution.
 
-The script will first pull all repo images to the local Docker repo. It then will stop the container running the registry, remove the mapped persistent storage and restart the container before pushing images back based on the retention index passed. An index of 3 for example will keep the last 3, most recent images for each repo and then delete the other images. Because images are pulled locally as a first stage, it is important to ensure that enough space is availabe to run the script.
+The script will first pull all repo images to the local Docker repo. It then will stop the container running the registry, remove the mapped persistent storage and restart the container before pushing images back based on the retention index passed. An index of 3 for example will keep the last 3, most recent images for each repo and then delete the other images. Because images are pulled locally as a first stage, it is important to ensure that enough space is available to run the script.
 
 To execute the script run:
 
